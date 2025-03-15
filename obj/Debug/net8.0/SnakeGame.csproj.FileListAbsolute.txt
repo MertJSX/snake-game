@@ -40,3 +40,4 @@ C:\Users\Admin\Downloads\SnakeGame\SnakeGame\SnakeGame\obj\Debug\net8.0\refint\S
 C:\Users\Admin\Downloads\SnakeGame\SnakeGame\SnakeGame\obj\Debug\net8.0\SnakeGame.pdb
 C:\Users\Admin\Downloads\SnakeGame\SnakeGame\SnakeGame\obj\Debug\net8.0\SnakeGame.genruntimeconfig.cache
 C:\Users\Admin\Downloads\SnakeGame\SnakeGame\SnakeGame\obj\Debug\net8.0\ref\SnakeGame.dll
+C:\Users\Admin\Downloads\SnakeGame\SnakeGame\SnakeGame\obj\Debug\net8.0\SnakeGame.sourcelink.json

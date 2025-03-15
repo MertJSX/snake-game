@@ -1,4 +1,5 @@
-﻿using static System.Net.Mime.MediaTypeNames;
+﻿using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SnakeGame
 {
@@ -6,6 +7,7 @@ namespace SnakeGame
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             Game game = new Game();
 
             while (!game.isGameOver)

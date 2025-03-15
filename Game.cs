@@ -8,7 +8,7 @@ namespace SnakeGame
 {
     enum GameElement
     {
-        Empty, Food, SnakePart
+        Empty, Food, SnakePart, SnakeHead
     }
 
     enum MoveDirection
@@ -66,10 +66,10 @@ namespace SnakeGame
             snake.Add(new MapPosition(2, 6)); // head
             snake.Add(new MapPosition(2, 5));
             snake.Add(new MapPosition(2, 4));
-            snake.Add(new MapPosition(2, 3));
-            snake.Add(new MapPosition(2, 2));
-            snake.Add(new MapPosition(2, 1));
-            snake.Add(new MapPosition(2, 0));
+            //snake.Add(new MapPosition(2, 3));
+            //snake.Add(new MapPosition(2, 2));
+            //snake.Add(new MapPosition(2, 1));
+            //snake.Add(new MapPosition(2, 0));
 
             foodPosition = new MapPosition(5, 5);
 
@@ -101,6 +101,30 @@ namespace SnakeGame
                 for (int j = 0; j < gameMap.GetLength(1); j++)
                 {
                     bool isItChangedToSnakePart = false;
+                    for (int snakeIndex = 0; snakeIndex < snake.Count; snakeIndex++)
+                    {
+                        if (isItChangedToSnakePart)
+                        {
+                            break;
+                        }
+                        if (snake[snakeIndex].dimension == i && snake[snakeIndex].position == j)
+                        {
+                            if (snakeIndex == 0)
+                            {
+                                gameMap[i, j] = GameElement.SnakeHead;
+                            } 
+                            else
+                            {
+                                gameMap[i, j] = GameElement.SnakePart;
+                            }
+                            isItChangedToSnakePart = true;
+                            earlyChangedPosses.Add(snake[snakeIndex]);
+                        }
+                        else if (!earlyChangedPosses.Contains(snake[snakeIndex]))
+                        {
+                            gameMap[i, j] = GameElement.Empty;
+                        }
+                    }
                     foreach (MapPosition pos in snake)
                     {
                         if (isItChangedToSnakePart)
@@ -208,9 +232,9 @@ namespace SnakeGame
 
         public void GameTick()
         {
+            RenderMap();
             MoveSnake();
             SetMapElements();
-            RenderMap();
         }
 
 
@@ -235,6 +259,26 @@ namespace SnakeGame
                             break;
                         case GameElement.SnakePart:
                             sb.Append(green + "O" + reset);
+                            break;
+                        case GameElement.SnakeHead:
+                            switch (snakeMoveDirection)
+                            {
+                                case MoveDirection.Right:
+                                    sb.Append(green + ">" + reset);
+                                    break;
+                                case MoveDirection.Left:
+                                    sb.Append(green + "<" + reset);
+                                    break;
+                                case MoveDirection.Up:
+                                    sb.Append(green + "^" + reset);
+                                    break;
+                                case MoveDirection.Down:
+                                    sb.Append(green + "V" + reset);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
                             break;
                         default:
                             sb.Append(" ");
