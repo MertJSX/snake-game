@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SnakeGame
 {
@@ -7,12 +6,12 @@ namespace SnakeGame
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = Encoding.UTF8;
-            Game game = new Game();
+            Console.OutputEncoding = Encoding.UTF8; // Change the output encoding of the Console
+            Game game = new Game(); // Create new Game object
 
-            while (!game.isGameOver)
+            var inputTask = Task.Run(() => GetInput(game)); // Run the GetInput method asynchronously
+            while (!game.isGameOver) // Repeat until the player tries to eat themselves xd
             {
-                var inputTask = Task.Run(() => GetInput(game));
                 Thread.Sleep(50);
                 game.GameTick();
             }
@@ -24,8 +23,10 @@ namespace SnakeGame
         {
             while (true)
             {
+                // Read keyboard key
                 var key = Console.ReadKey(intercept: true).Key;
 
+                // Determine which key is pressed then set the move direction of the snake.
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
