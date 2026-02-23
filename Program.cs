@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 
 namespace SnakeGame
 {
@@ -8,11 +8,30 @@ namespace SnakeGame
         {
             Console.OutputEncoding = Encoding.UTF8; // Change the output encoding of the Console
             Game game = new Game(); // Create new Game object
+            Console.WriteLine("(1) Easy mode:");
+            Console.WriteLine("(2) Normal mode:");
+            Console.WriteLine("(3) Hard mode:\n");
+            Console.WriteLine("Select mode:");
+            string mode = Console.ReadLine();
+            int speed = 50;
+
+            switch (mode)
+            {
+                case "1":
+                    speed = 100;
+                    break;
+                case "2":
+                    speed = 50;
+                    break;
+                default:
+                    speed = 25;
+                    break;
+            }
 
             var inputTask = Task.Run(() => GetInput(game)); // Run the GetInput method asynchronously
             while (!game.isGameOver) // Repeat until the player tries to eat themselves xd
             {
-                Thread.Sleep(50);
+                Thread.Sleep(speed); // 50 best
                 game.GameTick();
             }
             Thread.Sleep(1000);
